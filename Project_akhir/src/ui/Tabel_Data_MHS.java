@@ -32,6 +32,7 @@ public class Tabel_Data_MHS extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         Menu_TabelDataMHS = new javax.swing.JMenu();
         MenuItem1_FormulirMHS = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         Menuitem3_Keluar = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -81,7 +82,7 @@ public class Tabel_Data_MHS extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "NIM", "NIK", "Nama", "Jenis Kelamin", "Tgl Lahir", "Asal Sekolah", "Email", "No tlp", "Alamat", "Agama", "Nama Orang Tua"
+                "NIK", "Nama", "Jurusan", "Jenis Kelamin", "Tgl Lahir", "Asal Sekolah", "Email", "No tlp", "Alamat", "Agama", "Nama Orang Tua"
             }
         ));
         jScrollPane1.setViewportView(Tabel_Data_MHS);
@@ -106,6 +107,14 @@ public class Tabel_Data_MHS extends javax.swing.JFrame {
             }
         });
         Menu_TabelDataMHS.add(MenuItem1_FormulirMHS);
+
+        jMenuItem1.setText("NIM Mahasiswa");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        Menu_TabelDataMHS.add(jMenuItem1);
 
         Menuitem3_Keluar.setText("Keluar");
         Menuitem3_Keluar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -166,6 +175,10 @@ public class Tabel_Data_MHS extends javax.swing.JFrame {
         HapusData();
     }//GEN-LAST:event_Hapus_BTNActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        dispose();new NIM_mhs().setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
         private void TampilData() {
         try {
             st = cn.createStatement();
@@ -175,6 +188,7 @@ public class Tabel_Data_MHS extends javax.swing.JFrame {
             model.addColumn("id_mhs");
             model.addColumn("NIK");
             model.addColumn("Nama Lengkap");
+            model.addColumn("jurusan");
             model.addColumn("Jenis Kelamin");
             model.addColumn("Tanggal Lahir");
             model.addColumn("Asal Sekolah");
@@ -189,6 +203,7 @@ public class Tabel_Data_MHS extends javax.swing.JFrame {
                     rs.getInt("id_mhs"),
                     rs.getString("NIK"),
                     rs.getString("nama_lengkap"),
+                    rs.getString("jurusan"),
                     rs.getString("jenis_kelamin"),
                     rs.getString("tgl_lahir"),
                     rs.getString("asal_sekolah"),
@@ -270,6 +285,7 @@ public class Tabel_Data_MHS extends javax.swing.JFrame {
     private javax.swing.JButton Simpan_BTN;
     private javax.swing.JTable Tabel_Data_MHS;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
