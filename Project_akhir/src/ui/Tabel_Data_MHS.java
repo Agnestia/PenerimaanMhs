@@ -2,6 +2,7 @@ package ui;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.PreparedStatement;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -40,6 +41,11 @@ public class Tabel_Data_MHS extends javax.swing.JFrame {
         Edit_BTN.setText("Edit");
 
         Hapus_BTN.setText("Hapus");
+        Hapus_BTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Hapus_BTNActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -107,6 +113,11 @@ public class Tabel_Data_MHS extends javax.swing.JFrame {
                 Menuitem3_KeluarMouseClicked(evt);
             }
         });
+        Menuitem3_Keluar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Menuitem3_KeluarActionPerformed(evt);
+            }
+        });
         Menu_TabelDataMHS.add(Menuitem3_Keluar);
 
         jMenuBar1.add(Menu_TabelDataMHS);
@@ -142,10 +153,18 @@ public class Tabel_Data_MHS extends javax.swing.JFrame {
     private void MenuItem1_FormulirMHSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItem1_FormulirMHSActionPerformed
         dispose();new Formulir_MHS().setVisible(true);
     }//GEN-LAST:event_MenuItem1_FormulirMHSActionPerformed
-
+    
     private void Menuitem3_KeluarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menuitem3_KeluarMouseClicked
-        dispose();
+        
     }//GEN-LAST:event_Menuitem3_KeluarMouseClicked
+
+    private void Menuitem3_KeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Menuitem3_KeluarActionPerformed
+        dispose();
+    }//GEN-LAST:event_Menuitem3_KeluarActionPerformed
+
+    private void Hapus_BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Hapus_BTNActionPerformed
+        HapusData();
+    }//GEN-LAST:event_Hapus_BTNActionPerformed
 
         private void TampilData() {
         try {
@@ -153,6 +172,7 @@ public class Tabel_Data_MHS extends javax.swing.JFrame {
             rs = st.executeQuery("SELECT * FROM biodata_mhs");
 
             DefaultTableModel model = new DefaultTableModel();
+            model.addColumn("id_mhs");
             model.addColumn("NIK");
             model.addColumn("Nama Lengkap");
             model.addColumn("Jenis Kelamin");
@@ -166,6 +186,7 @@ public class Tabel_Data_MHS extends javax.swing.JFrame {
 
             while (rs.next()) {
                 model.addRow(new Object[]{
+                    rs.getInt("id_mhs"),
                     rs.getString("NIK"),
                     rs.getString("nama_lengkap"),
                     rs.getString("jenis_kelamin"),
@@ -185,15 +206,16 @@ public class Tabel_Data_MHS extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Gagal menampilkan data: " + e.getMessage());
         }
     }
-        
-        private void Hapus_BTNActionPerformed(java.awt.event.ActionEvent evt) {
-        try {
+       private void HapusData(){
+       try {
             int selectedRow = Tabel_Data_MHS.getSelectedRow();
             String NIK = Tabel_Data_MHS.getValueAt(selectedRow, 0).toString();
             
-            st = cn.createStatement();
-            String sql = "DELETE FROM biodata_mhs WHERE NIK = '" + NIK + "'";
-            st.executeUpdate(sql);
+            String sql = "DELETE FROM biodata_mhs WHERE id_mhs = ?";
+            PreparedStatement pst = cn.prepareStatement(sql);
+            pst.setString(1, NIK);
+        
+            pst.executeUpdate();
             
             JOptionPane.showMessageDialog(null, "Data berhasil dihapus");
             TampilData();
@@ -201,7 +223,8 @@ public class Tabel_Data_MHS extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Gagal menghapus data: " + e.getMessage());
         }
-    }   
+       }
+  
     
     /**
      * @param args the command line arguments

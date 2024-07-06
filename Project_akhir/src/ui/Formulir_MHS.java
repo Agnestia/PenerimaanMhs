@@ -119,6 +119,10 @@ public class Formulir_MHS extends javax.swing.JFrame {
         Panel_FormulirPendaftaranMHS.setLayout(Panel_FormulirPendaftaranMHSLayout);
         Panel_FormulirPendaftaranMHSLayout.setHorizontalGroup(
             Panel_FormulirPendaftaranMHSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_FormulirPendaftaranMHSLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Simpan_BTN)
+                .addGap(15, 15, 15))
             .addGroup(Panel_FormulirPendaftaranMHSLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(Panel_FormulirPendaftaranMHSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -156,23 +160,19 @@ public class Formulir_MHS extends javax.swing.JFrame {
                                 .addGroup(Panel_FormulirPendaftaranMHSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(Field_NamaLengkap, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(Field_NIK, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(115, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_FormulirPendaftaranMHSLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Simpan_BTN)
-                .addGap(18, 18, 18))
+                .addContainerGap(82, Short.MAX_VALUE))
         );
         Panel_FormulirPendaftaranMHSLayout.setVerticalGroup(
             Panel_FormulirPendaftaranMHSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_FormulirPendaftaranMHSLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addContainerGap(46, Short.MAX_VALUE)
                 .addGroup(Panel_FormulirPendaftaranMHSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Field_NamaLengkap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel2)
+                    .addComponent(Field_NIK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(Panel_FormulirPendaftaranMHSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Field_NIK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                .addGroup(Panel_FormulirPendaftaranMHSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addComponent(Field_NamaLengkap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(Panel_FormulirPendaftaranMHSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Field_JenisKelamin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -205,9 +205,9 @@ public class Formulir_MHS extends javax.swing.JFrame {
                 .addGroup(Panel_FormulirPendaftaranMHSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Field_NamaOrtu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(Simpan_BTN)
-                .addGap(22, 22, 22))
+                .addGap(16, 16, 16))
         );
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
@@ -253,7 +253,7 @@ public class Formulir_MHS extends javax.swing.JFrame {
                 .addGap(61, 61, 61))
         );
 
-        Menu_FormulirMHS.setText("File");
+        Menu_FormulirMHS.setText("Menu");
 
         MenuItem2_TabelDataMHS.setText("Tabel Data Mahasiswa");
         MenuItem2_TabelDataMHS.addMouseListener(new java.awt.event.MouseAdapter() {
