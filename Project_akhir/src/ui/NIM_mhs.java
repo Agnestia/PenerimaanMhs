@@ -51,7 +51,7 @@ public class NIM_mhs extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jMenu1.setText("File");
+        jMenu1.setText("Menu");
 
         MenuFormulirMhs.setText("Formulir Mahasiswa");
         MenuFormulirMhs.addActionListener(new java.awt.event.ActionListener() {

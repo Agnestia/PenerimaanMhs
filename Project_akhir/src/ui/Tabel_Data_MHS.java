@@ -103,7 +103,7 @@ public class Tabel_Data_MHS extends javax.swing.JFrame {
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 585, Short.MAX_VALUE)
         );
 
-        Menu_TabelDataMHS.setText("File");
+        Menu_TabelDataMHS.setText("Menu");
 
         MenuItem1_FormulirMHS.setText("Formulir  Mahasiswa");
         MenuItem1_FormulirMHS.addActionListener(new java.awt.event.ActionListener() {

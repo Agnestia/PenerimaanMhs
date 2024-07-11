@@ -386,6 +386,10 @@ public class Formulir_MHS extends javax.swing.JFrame {
 
     private void Simpan_BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Simpan_BTNActionPerformed
     if(benar ==1){
+        if (Check_field_kosong()) {
+            JOptionPane.showMessageDialog(null, "Semua field harus diisi");
+            return;
+        }
         try {
         st = cn.createStatement();
 
@@ -467,6 +471,10 @@ public class Formulir_MHS extends javax.swing.JFrame {
             }
         }
     }else if(benar == 2){
+        if (Check_field_kosong()) {
+            JOptionPane.showMessageDialog(null, "Semua field harus diisi");
+            return;
+        }
         String NIM = null ;
         try {
         st = cn.createStatement();
@@ -535,6 +543,8 @@ public class Formulir_MHS extends javax.swing.JFrame {
         }
     }
     }
+    
+    
     }//GEN-LAST:event_Simpan_BTNActionPerformed
 
     private void CmbJnsKelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CmbJnsKelActionPerformed
@@ -630,6 +640,20 @@ public class Formulir_MHS extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 
+    private boolean Check_field_kosong() {
+    return Field_NIK.getText().isEmpty() || 
+           Field_NamaLengkap.getText().isEmpty() || 
+           CmbJurusan.getSelectedItem() == null || 
+           CmbJnsKel.getSelectedItem() == null || 
+           Field_TglLahir.getText().isEmpty() || 
+           Field_AsalSekolah.getText().isEmpty() || 
+           Field_Email.getText().isEmpty() || 
+           Field_NoTlp.getText().isEmpty() || 
+           Field_Alamat.getText().isEmpty() || 
+           CmbAgama.getSelectedItem() == null || 
+           Field_NamaOrtu.getText().isEmpty();
+}
+    
     private void tampilData(String NIK) {
        Menu_FormulirMHS.setVisible(false);
         jLabel11.setText("Formulir Update Mahasiswa");
