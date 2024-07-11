@@ -40,6 +40,11 @@ public class Tabel_Data_MHS extends javax.swing.JFrame {
         Simpan_BTN.setText("Simpan");
 
         Edit_BTN.setText("Edit");
+        Edit_BTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Edit_BTNActionPerformed(evt);
+            }
+        });
 
         Hapus_BTN.setText("Hapus");
         Hapus_BTN.addActionListener(new java.awt.event.ActionListener() {
@@ -160,7 +165,7 @@ public class Tabel_Data_MHS extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void MenuItem1_FormulirMHSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItem1_FormulirMHSActionPerformed
-        dispose();new Formulir_MHS().setVisible(true);
+        dispose();new Formulir_MHS(1,"").setVisible(true);
     }//GEN-LAST:event_MenuItem1_FormulirMHSActionPerformed
     
     private void Menuitem3_KeluarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menuitem3_KeluarMouseClicked
@@ -178,6 +183,15 @@ public class Tabel_Data_MHS extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         dispose();new NIM_mhs().setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void Edit_BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Edit_BTNActionPerformed
+         int selectedRow = Tabel_Data_MHS.getSelectedRow();
+         String NIK = Tabel_Data_MHS.getValueAt(selectedRow, 1).toString();
+         int benar =2;
+         Formulir_MHS form = new Formulir_MHS(benar,NIK);
+         dispose();
+         form.setVisible(true);
+    }//GEN-LAST:event_Edit_BTNActionPerformed
 
         private void TampilData() {
         try {

@@ -1,6 +1,7 @@
 package ui;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.SQLException;
@@ -10,10 +11,18 @@ public class Formulir_MHS extends javax.swing.JFrame {
 
     Connection cn;
     Statement st;
+    int benar = 1;
     
-    public Formulir_MHS() {
+    public Formulir_MHS(int benar, String NIK) {
         initComponents();
         cn = KoneksiDatabase.BukaKoneksi();
+        
+        Batal_BTN.setVisible(false);
+        
+        if(benar ==2)
+        {
+            tampilData(NIK);
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -45,6 +54,7 @@ public class Formulir_MHS extends javax.swing.JFrame {
         CmbAgama = new javax.swing.JComboBox<>();
         jLabel12 = new javax.swing.JLabel();
         CmbJurusan = new javax.swing.JComboBox<>();
+        Batal_BTN = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -138,6 +148,15 @@ public class Formulir_MHS extends javax.swing.JFrame {
             }
         });
 
+        Batal_BTN.setBackground(new java.awt.Color(255, 0, 0));
+        Batal_BTN.setForeground(new java.awt.Color(255, 255, 255));
+        Batal_BTN.setText("Batal");
+        Batal_BTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Batal_BTNActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout Panel_FormulirPendaftaranMHSLayout = new javax.swing.GroupLayout(Panel_FormulirPendaftaranMHS);
         Panel_FormulirPendaftaranMHS.setLayout(Panel_FormulirPendaftaranMHSLayout);
         Panel_FormulirPendaftaranMHSLayout.setHorizontalGroup(
@@ -185,6 +204,8 @@ public class Formulir_MHS extends javax.swing.JFrame {
                         .addContainerGap(160, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_FormulirPendaftaranMHSLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(Batal_BTN)
+                        .addGap(18, 18, 18)
                         .addComponent(Simpan_BTN)
                         .addGap(30, 30, 30))
                     .addGroup(Panel_FormulirPendaftaranMHSLayout.createSequentialGroup()
@@ -239,7 +260,9 @@ public class Formulir_MHS extends javax.swing.JFrame {
                     .addComponent(Field_NamaOrtu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10))
                 .addGap(18, 18, 18)
-                .addComponent(Simpan_BTN)
+                .addGroup(Panel_FormulirPendaftaranMHSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Simpan_BTN)
+                    .addComponent(Batal_BTN))
                 .addGap(16, 16, 16))
         );
 
@@ -362,7 +385,8 @@ public class Formulir_MHS extends javax.swing.JFrame {
     }//GEN-LAST:event_MenuItem3_KeluarActionPerformed
 
     private void Simpan_BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Simpan_BTNActionPerformed
-    try {
+    if(benar ==1){
+        try {
         st = cn.createStatement();
 
         // Tentukan awalan berdasarkan jurusan
@@ -422,16 +446,94 @@ public class Formulir_MHS extends javax.swing.JFrame {
                 + Field_NIK.getText() + "','"
                 + CmbJurusan.getSelectedItem().toString() + "')";
         st.executeUpdate(sql);
-
+        
         JOptionPane.showMessageDialog(null, "Data berhasil disimpan dengan NIM: " + NIM);
+        Field_NIK.setText("");
+        Field_NamaLengkap.setText("");
+        Field_TglLahir.setText("");
+        Field_AsalSekolah.setText("");
+        Field_Email.setText("");
+        Field_NoTlp.setText("");
+        Field_Alamat.setText("");
+        Field_NamaOrtu.setText("");
+        Field_NIK.requestFocus();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Gagal menyimpan data: " + e.getMessage());
+        } finally {
+            try {
+                if (st != null) st.close();  
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "Error saat menutup Statement: " + e.getMessage());
+            }
+        }
+    }else if(benar == 2){
+        String NIM = null ;
+        try {
+        st = cn.createStatement();
+        
+        // Tentukan awalan berdasarkan jurusan
+        String jurusan = CmbJurusan.getSelectedItem().toString();
+        String prefix = "";
+        switch (jurusan) {
+            case "Teknik Informatika":
+                prefix = "A11";
+                break;
+            case "Multimedia":
+                prefix = "B11";
+                break;
+            case "Ilmu Komunikasi":
+                prefix = "C11";
+                break;
+            case "Ekonomi":
+                prefix = "D11";
+                break;
+            case "Kedokteran":
+                prefix = "E11";
+                break;
+            case "Hukum":
+                prefix = "F11";
+                break;
+        }
+
+        String sql = "UPDATE biodata_mhs SET "
+            + "nama_lengkap='" + Field_NamaLengkap.getText() + "', "
+            + "jurusan='" + CmbJurusan.getSelectedItem().toString() + "', "
+            + "jenis_kelamin='" + CmbJnsKel.getSelectedItem().toString() + "', "
+            + "tgl_lahir='" + Field_TglLahir.getText() + "', "
+            + "asal_sekolah='" + Field_AsalSekolah.getText() + "', "
+            + "email='" + Field_Email.getText() + "', "
+            + "no_tlp='" + Field_NoTlp.getText() + "', "
+            + "alamat='" + Field_Alamat.getText() + "', "
+            + "agama='" + CmbAgama.getSelectedItem().toString() + "', "
+            + "nama_orangtua='" + Field_NamaOrtu.getText() + "' "
+            + "WHERE NIK='" + Field_NIK.getText() + "';";
+        st.executeUpdate(sql);
+        
+        ResultSet rs = st.executeQuery("SELECT NIM FROM jurusan_mhs WHERE NIK = '"+Field_NIK.getText()+"' ");
+        while(rs.next()){
+            NIM = rs.getString("NIM");
+        }
+       
+        sql = "UPDATE jurusan_mhs SET "
+            + "nama_lengkap='" + Field_NamaLengkap.getText() + "', "
+            + "jurusan='" + CmbJurusan.getSelectedItem().toString() + "', "
+            + "NIK='" + Field_NIK.getText() + "' "
+            + "WHERE NIM='" + NIM + "'";
+        st.executeUpdate(sql);
+
+        JOptionPane.showMessageDialog(null, "Data berhasil diedit");
+        Tabel_Data_MHS frame = new Tabel_Data_MHS();
+        this.dispose();
+        frame.setVisible(true);
     } catch (SQLException e) {
-        JOptionPane.showMessageDialog(null, "Gagal menyimpan data: " + e.getMessage());
+        JOptionPane.showMessageDialog(null, "Gagal update data: " + e.getMessage());
     } finally {
         try {
             if (st != null) st.close();  
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error saat menutup Statement: " + e.getMessage());
         }
+    }
     }
     }//GEN-LAST:event_Simpan_BTNActionPerformed
 
@@ -450,6 +552,12 @@ public class Formulir_MHS extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         dispose();new NIM_mhs().setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void Batal_BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Batal_BTNActionPerformed
+        Tabel_Data_MHS frame = new Tabel_Data_MHS();
+        this.dispose();
+        frame.setVisible(true);
+    }//GEN-LAST:event_Batal_BTNActionPerformed
 
     /**
      * @param args the command line arguments
@@ -481,12 +589,13 @@ public class Formulir_MHS extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Formulir_MHS().setVisible(true);
+                new Formulir_MHS(1,"").setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Batal_BTN;
     private javax.swing.JComboBox<String> CmbAgama;
     private javax.swing.JComboBox<String> CmbJnsKel;
     private javax.swing.JComboBox<String> CmbJurusan;
@@ -520,4 +629,37 @@ public class Formulir_MHS extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
+
+    private void tampilData(String NIK) {
+       Menu_FormulirMHS.setVisible(false);
+        jLabel11.setText("Formulir Update Mahasiswa");
+        Field_NIK.setEditable(false);
+        Field_NamaLengkap.requestFocus();
+        Simpan_BTN.setText("Update");
+        Batal_BTN.setVisible(true);
+        PreparedStatement pst;
+         try {
+            String sql = "SELECT * FROM biodata_mhs WHERE NIK = ?";
+            pst = cn.prepareStatement(sql);
+            pst.setString(1, NIK);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                Field_NIK.setText(rs.getString("NIK"));
+                Field_NamaLengkap.setText(rs.getString("nama_lengkap"));
+                CmbJurusan.setSelectedItem(rs.getString("jurusan"));
+                CmbJnsKel.setSelectedItem(rs.getString("jenis_kelamin"));
+                Field_TglLahir.setText(rs.getString("tgl_lahir"));
+                Field_AsalSekolah.setText(rs.getString("asal_sekolah"));
+                Field_Email.setText(rs.getString("email"));
+                Field_NoTlp.setText(rs.getString("no_tlp"));
+                Field_Alamat.setText(rs.getString("alamat"));
+                CmbAgama.setSelectedItem(rs.getString("agama"));
+                Field_NamaOrtu.setText(rs.getString("nama_orangtua"));
+            }
+            rs.close();
+            benar = 2;
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Gagal mengambil data: " + e.getMessage());
+        } 
+    }
 }
