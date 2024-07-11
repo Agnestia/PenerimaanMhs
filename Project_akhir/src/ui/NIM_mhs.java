@@ -137,7 +137,7 @@ public class NIM_mhs extends javax.swing.JFrame {
     }//GEN-LAST:event_MenuKeluarActionPerformed
 
     private void MenuFormulirMhsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuFormulirMhsActionPerformed
-        dispose();new Formulir_MHS().setVisible(true);
+        dispose();new Formulir_MHS(1,"").setVisible(true);
     }//GEN-LAST:event_MenuFormulirMhsActionPerformed
 
     /**

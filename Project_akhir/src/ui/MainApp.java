@@ -9,7 +9,7 @@ public class MainApp {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Formulir_MHS().setVisible(true);
+                new Formulir_MHS(1,"").setVisible(true);
             }
         });
     }
