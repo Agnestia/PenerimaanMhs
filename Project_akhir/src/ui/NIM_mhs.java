@@ -32,9 +32,9 @@ public class NIM_mhs extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        MenuFormulirMhs = new javax.swing.JMenuItem();
-        MenuTabelDataMhs = new javax.swing.JMenuItem();
-        MenuKeluar = new javax.swing.JMenuItem();
+        MenuItem1_FormulirMHS = new javax.swing.JMenuItem();
+        MenuItem2_TabelDataMHS = new javax.swing.JMenuItem();
+        MenuItem3_Keluar = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -53,29 +53,29 @@ public class NIM_mhs extends javax.swing.JFrame {
 
         jMenu1.setText("Menu");
 
-        MenuFormulirMhs.setText("Formulir Mahasiswa");
-        MenuFormulirMhs.addActionListener(new java.awt.event.ActionListener() {
+        MenuItem1_FormulirMHS.setText("Formulir Mahasiswa");
+        MenuItem1_FormulirMHS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MenuFormulirMhsActionPerformed(evt);
+                MenuItem1_FormulirMHSActionPerformed(evt);
             }
         });
-        jMenu1.add(MenuFormulirMhs);
+        jMenu1.add(MenuItem1_FormulirMHS);
 
-        MenuTabelDataMhs.setText("Tabel Data Mahasiswa");
-        MenuTabelDataMhs.addActionListener(new java.awt.event.ActionListener() {
+        MenuItem2_TabelDataMHS.setText("Tabel Data Mahasiswa");
+        MenuItem2_TabelDataMHS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MenuTabelDataMhsActionPerformed(evt);
+                MenuItem2_TabelDataMHSActionPerformed(evt);
             }
         });
-        jMenu1.add(MenuTabelDataMhs);
+        jMenu1.add(MenuItem2_TabelDataMHS);
 
-        MenuKeluar.setText("Keluar");
-        MenuKeluar.addActionListener(new java.awt.event.ActionListener() {
+        MenuItem3_Keluar.setText("Keluar");
+        MenuItem3_Keluar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MenuKeluarActionPerformed(evt);
+                MenuItem3_KeluarActionPerformed(evt);
             }
         });
-        jMenu1.add(MenuKeluar);
+        jMenu1.add(MenuItem3_Keluar);
 
         jMenuBar1.add(jMenu1);
 
@@ -128,17 +128,17 @@ public class NIM_mhs extends javax.swing.JFrame {
         }
     }
     
-    private void MenuTabelDataMhsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuTabelDataMhsActionPerformed
+    private void MenuItem2_TabelDataMHSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItem2_TabelDataMHSActionPerformed
         dispose();new Tabel_Data_MHS().setVisible(true);
-    }//GEN-LAST:event_MenuTabelDataMhsActionPerformed
+    }//GEN-LAST:event_MenuItem2_TabelDataMHSActionPerformed
 
-    private void MenuKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuKeluarActionPerformed
+    private void MenuItem3_KeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItem3_KeluarActionPerformed
         dispose();
-    }//GEN-LAST:event_MenuKeluarActionPerformed
+    }//GEN-LAST:event_MenuItem3_KeluarActionPerformed
 
-    private void MenuFormulirMhsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuFormulirMhsActionPerformed
+    private void MenuItem1_FormulirMHSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItem1_FormulirMHSActionPerformed
         dispose();new Formulir_MHS(1,"").setVisible(true);
-    }//GEN-LAST:event_MenuFormulirMhsActionPerformed
+    }//GEN-LAST:event_MenuItem1_FormulirMHSActionPerformed
 
     /**
      * @param args the command line arguments
@@ -176,9 +176,9 @@ public class NIM_mhs extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem MenuFormulirMhs;
-    private javax.swing.JMenuItem MenuKeluar;
-    private javax.swing.JMenuItem MenuTabelDataMhs;
+    private javax.swing.JMenuItem MenuItem1_FormulirMHS;
+    private javax.swing.JMenuItem MenuItem2_TabelDataMHS;
+    private javax.swing.JMenuItem MenuItem3_Keluar;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;

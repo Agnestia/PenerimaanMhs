@@ -17,12 +17,12 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MenuItem1_FormulirMHSActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
+            <MenuItem class="javax.swing.JMenuItem" name="MenuItem2_NIM_MHS">
               <Properties>
                 <Property name="text" type="java.lang.String" value="NIM Mahasiswa"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MenuItem2_NIM_MHSActionPerformed"/>
               </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="Menuitem3_Keluar">
@@ -98,9 +98,7 @@
                   <Component id="Hapus_BTN" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                   <Component id="Edit_BTN" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="42" max="32767" attributes="0"/>
-                  <Component id="Simpan_BTN" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                  <EmptySpace pref="130" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -111,7 +109,6 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="Hapus_BTN" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="Edit_BTN" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="Simpan_BTN" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="16" max="32767" attributes="0"/>
               </Group>
@@ -119,11 +116,6 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="Simpan_BTN">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Simpan"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JButton" name="Edit_BTN">
           <Properties>
             <Property name="text" type="java.lang.String" value="Edit"/>

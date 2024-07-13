@@ -9,28 +9,28 @@
             <Property name="text" type="java.lang.String" value="Menu"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="MenuFormulirMhs">
+            <MenuItem class="javax.swing.JMenuItem" name="MenuItem1_FormulirMHS">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Formulir Mahasiswa"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MenuFormulirMhsActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MenuItem1_FormulirMHSActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="MenuTabelDataMhs">
+            <MenuItem class="javax.swing.JMenuItem" name="MenuItem2_TabelDataMHS">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Tabel Data Mahasiswa"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MenuTabelDataMhsActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MenuItem2_TabelDataMHSActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="MenuKeluar">
+            <MenuItem class="javax.swing.JMenuItem" name="MenuItem3_Keluar">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Keluar"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MenuKeluarActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MenuItem3_KeluarActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>

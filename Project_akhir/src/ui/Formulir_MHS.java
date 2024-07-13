@@ -59,8 +59,8 @@ public class Formulir_MHS extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         Menu_FormulirMHS = new javax.swing.JMenu();
+        MenuItem1_NIM_MHS = new javax.swing.JMenuItem();
         MenuItem2_TabelDataMHS = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
         MenuItem3_Keluar = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -311,6 +311,14 @@ public class Formulir_MHS extends javax.swing.JFrame {
 
         Menu_FormulirMHS.setText("Menu");
 
+        MenuItem1_NIM_MHS.setText("NIM Mahasiswa");
+        MenuItem1_NIM_MHS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuItem1_NIM_MHSActionPerformed(evt);
+            }
+        });
+        Menu_FormulirMHS.add(MenuItem1_NIM_MHS);
+
         MenuItem2_TabelDataMHS.setText("Tabel Data Mahasiswa");
         MenuItem2_TabelDataMHS.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -323,14 +331,6 @@ public class Formulir_MHS extends javax.swing.JFrame {
             }
         });
         Menu_FormulirMHS.add(MenuItem2_TabelDataMHS);
-
-        jMenuItem1.setText("NIM Mahasiswa");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        Menu_FormulirMHS.add(jMenuItem1);
 
         MenuItem3_Keluar.setText("Keluar");
         MenuItem3_Keluar.addActionListener(new java.awt.event.ActionListener() {
@@ -559,16 +559,61 @@ public class Formulir_MHS extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_CmbJurusanActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void MenuItem1_NIM_MHSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItem1_NIM_MHSActionPerformed
         dispose();new NIM_mhs().setVisible(true);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_MenuItem1_NIM_MHSActionPerformed
 
     private void Batal_BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Batal_BTNActionPerformed
         Tabel_Data_MHS frame = new Tabel_Data_MHS();
         this.dispose();
         frame.setVisible(true);
     }//GEN-LAST:event_Batal_BTNActionPerformed
-
+    private boolean Check_field_kosong() {
+    return Field_NIK.getText().isEmpty() || 
+           Field_NamaLengkap.getText().isEmpty() || 
+           CmbJurusan.getSelectedItem() == null || 
+           CmbJnsKel.getSelectedItem() == null || 
+           Field_TglLahir.getText().isEmpty() || 
+           Field_AsalSekolah.getText().isEmpty() || 
+           Field_Email.getText().isEmpty() || 
+           Field_NoTlp.getText().isEmpty() || 
+           Field_Alamat.getText().isEmpty() || 
+           CmbAgama.getSelectedItem() == null || 
+           Field_NamaOrtu.getText().isEmpty();
+}
+    
+    private void tampilData(String NIK) {
+       Menu_FormulirMHS.setVisible(false);
+        jLabel11.setText("Formulir Update Mahasiswa");
+        Field_NIK.setEditable(false);
+        Field_NamaLengkap.requestFocus();
+        Simpan_BTN.setText("Update");
+        Batal_BTN.setVisible(true);
+        PreparedStatement pst;
+         try {
+            String sql = "SELECT * FROM biodata_mhs WHERE NIK = ?";
+            pst = cn.prepareStatement(sql);
+            pst.setString(1, NIK);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                Field_NIK.setText(rs.getString("NIK"));
+                Field_NamaLengkap.setText(rs.getString("nama_lengkap"));
+                CmbJurusan.setSelectedItem(rs.getString("jurusan"));
+                CmbJnsKel.setSelectedItem(rs.getString("jenis_kelamin"));
+                Field_TglLahir.setText(rs.getString("tgl_lahir"));
+                Field_AsalSekolah.setText(rs.getString("asal_sekolah"));
+                Field_Email.setText(rs.getString("email"));
+                Field_NoTlp.setText(rs.getString("no_tlp"));
+                Field_Alamat.setText(rs.getString("alamat"));
+                CmbAgama.setSelectedItem(rs.getString("agama"));
+                Field_NamaOrtu.setText(rs.getString("nama_orangtua"));
+            }
+            rs.close();
+            benar = 2;
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Gagal mengambil data: " + e.getMessage());
+        } 
+    }
     /**
      * @param args the command line arguments
      */
@@ -617,6 +662,7 @@ public class Formulir_MHS extends javax.swing.JFrame {
     private javax.swing.JTextField Field_NamaOrtu;
     private javax.swing.JTextField Field_NoTlp;
     private javax.swing.JTextField Field_TglLahir;
+    private javax.swing.JMenuItem MenuItem1_NIM_MHS;
     private javax.swing.JMenuItem MenuItem2_TabelDataMHS;
     private javax.swing.JMenuItem MenuItem3_Keluar;
     private javax.swing.JMenu Menu_FormulirMHS;
@@ -636,54 +682,8 @@ public class Formulir_MHS extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 
-    private boolean Check_field_kosong() {
-    return Field_NIK.getText().isEmpty() || 
-           Field_NamaLengkap.getText().isEmpty() || 
-           CmbJurusan.getSelectedItem() == null || 
-           CmbJnsKel.getSelectedItem() == null || 
-           Field_TglLahir.getText().isEmpty() || 
-           Field_AsalSekolah.getText().isEmpty() || 
-           Field_Email.getText().isEmpty() || 
-           Field_NoTlp.getText().isEmpty() || 
-           Field_Alamat.getText().isEmpty() || 
-           CmbAgama.getSelectedItem() == null || 
-           Field_NamaOrtu.getText().isEmpty();
-}
     
-    private void tampilData(String NIK) {
-       Menu_FormulirMHS.setVisible(false);
-        jLabel11.setText("Formulir Update Mahasiswa");
-        Field_NIK.setEditable(false);
-        Field_NamaLengkap.requestFocus();
-        Simpan_BTN.setText("Update");
-        Batal_BTN.setVisible(true);
-        PreparedStatement pst;
-         try {
-            String sql = "SELECT * FROM biodata_mhs WHERE NIK = ?";
-            pst = cn.prepareStatement(sql);
-            pst.setString(1, NIK);
-            ResultSet rs = pst.executeQuery();
-            if (rs.next()) {
-                Field_NIK.setText(rs.getString("NIK"));
-                Field_NamaLengkap.setText(rs.getString("nama_lengkap"));
-                CmbJurusan.setSelectedItem(rs.getString("jurusan"));
-                CmbJnsKel.setSelectedItem(rs.getString("jenis_kelamin"));
-                Field_TglLahir.setText(rs.getString("tgl_lahir"));
-                Field_AsalSekolah.setText(rs.getString("asal_sekolah"));
-                Field_Email.setText(rs.getString("email"));
-                Field_NoTlp.setText(rs.getString("no_tlp"));
-                Field_Alamat.setText(rs.getString("alamat"));
-                CmbAgama.setSelectedItem(rs.getString("agama"));
-                Field_NamaOrtu.setText(rs.getString("nama_orangtua"));
-            }
-            rs.close();
-            benar = 2;
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Gagal mengambil data: " + e.getMessage());
-        } 
-    }
 }
