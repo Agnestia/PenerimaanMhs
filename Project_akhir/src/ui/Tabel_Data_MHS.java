@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import koneksi.KoneksiDatabase;
 
+
 public class Tabel_Data_MHS extends javax.swing.JFrame {
     Connection cn;
     Statement st;
@@ -23,11 +24,15 @@ public class Tabel_Data_MHS extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        Edit_BTN = new javax.swing.JButton();
-        Hapus_BTN = new javax.swing.JButton();
+        CmbCariData = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        TxtCariData = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         Tabel_Data_MHS = new javax.swing.JTable();
+        jScrollBar1 = new javax.swing.JScrollBar();
+        Hapus_BTN = new javax.swing.JButton();
+        Edit_BTN = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         Menu_TabelDataMHS = new javax.swing.JMenu();
         MenuItem1_FormulirMHS = new javax.swing.JMenuItem();
@@ -36,17 +41,18 @@ public class Tabel_Data_MHS extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        Edit_BTN.setText("Edit");
-        Edit_BTN.addActionListener(new java.awt.event.ActionListener() {
+        CmbCariData.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NIK", "Nama_lengkap", "Jurusan", "Jenis Kelamin", "Email", "No tlp", "Agama" }));
+        CmbCariData.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Edit_BTNActionPerformed(evt);
+                CmbCariDataActionPerformed(evt);
             }
         });
 
-        Hapus_BTN.setText("Hapus");
-        Hapus_BTN.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Hapus_BTNActionPerformed(evt);
+        jLabel1.setText("Cari Data");
+
+        TxtCariData.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TxtCariDataKeyPressed(evt);
             }
         });
 
@@ -54,21 +60,24 @@ public class Tabel_Data_MHS extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(Hapus_BTN)
-                .addGap(41, 41, 41)
-                .addComponent(Edit_BTN)
-                .addContainerGap(130, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addComponent(CmbCariData, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
+                .addComponent(TxtCariData, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Hapus_BTN)
-                    .addComponent(Edit_BTN))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addGap(0, 27, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(CmbCariData)
+                        .addComponent(TxtCariData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -81,7 +90,7 @@ public class Tabel_Data_MHS extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "NIK", "Nama", "Jurusan", "Jenis Kelamin", "Tgl Lahir", "Asal Sekolah", "Email", "No tlp", "Alamat", "Agama", "Nama Orang Tua"
+                "NIK", "Nama_lengkap", "Jurusan", "Jenis Kelamin", "Tgl Lahir", "Asal Sekolah", "Email", "No tlp", "Alamat", "Agama", "Nama Orang Tua"
             }
         ));
         jScrollPane1.setViewportView(Tabel_Data_MHS);
@@ -90,12 +99,35 @@ public class Tabel_Data_MHS extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1194, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1178, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 585, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        Hapus_BTN.setText("Hapus");
+        Hapus_BTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Hapus_BTNActionPerformed(evt);
+            }
+        });
+
+        Edit_BTN.setText("Edit");
+        Edit_BTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Edit_BTNActionPerformed(evt);
+            }
+        });
 
         Menu_TabelDataMHS.setText("Menu");
 
@@ -141,18 +173,28 @@ public class Tabel_Data_MHS extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 709, Short.MAX_VALUE))
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(Edit_BTN)
+                .addGap(26, 26, 26)
+                .addComponent(Hapus_BTN)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(51, 51, 51)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Hapus_BTN)
+                    .addComponent(Edit_BTN))
+                .addGap(44, 44, 44)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -175,7 +217,7 @@ public class Tabel_Data_MHS extends javax.swing.JFrame {
     }//GEN-LAST:event_Hapus_BTNActionPerformed
 
     private void MenuItem2_NIM_MHSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItem2_NIM_MHSActionPerformed
-        dispose();new NIM_mhs().setVisible(true);
+        dispose(); new NIM_mhs().setVisible(true);
     }//GEN-LAST:event_MenuItem2_NIM_MHSActionPerformed
 
     private void Edit_BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Edit_BTNActionPerformed
@@ -187,66 +229,146 @@ public class Tabel_Data_MHS extends javax.swing.JFrame {
          form.setVisible(true);
     }//GEN-LAST:event_Edit_BTNActionPerformed
 
-       private void TampilData() {
+    private void CmbCariDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CmbCariDataActionPerformed
+       
+    }//GEN-LAST:event_CmbCariDataActionPerformed
+
+    private void TxtCariDataKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtCariDataKeyPressed
+
+            CariData();
+    }//GEN-LAST:event_TxtCariDataKeyPressed
+
+private void TampilData() {
+    try {
+        st = cn.createStatement();
+        rs = st.executeQuery("SELECT * FROM biodata_mhs ORDER BY id_mhs ASC");
+
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("id_mhs");
+        model.addColumn("NIK");
+        model.addColumn("Nama Lengkap");
+        model.addColumn("jurusan");
+        model.addColumn("Jenis Kelamin");
+        model.addColumn("Tanggal Lahir");
+        model.addColumn("Asal Sekolah");
+        model.addColumn("Email");
+        model.addColumn("No Telepon");
+        model.addColumn("Alamat");
+        model.addColumn("Agama");
+        model.addColumn("Nama Orang Tua");
+
+        while (rs.next()) {
+            model.addRow(new Object[]{
+                rs.getInt("id_mhs"),
+                rs.getString("NIK"),
+                rs.getString("nama_lengkap"),
+                rs.getString("jurusan"),
+                rs.getString("jenis_kelamin"),
+                rs.getString("tgl_lahir"),
+                rs.getString("asal_sekolah"),
+                rs.getString("email"),
+                rs.getString("no_tlp"),
+                rs.getString("alamat"),
+                rs.getString("agama"),
+                rs.getString("nama_orangtua")
+            });
+        }
+
+        Tabel_Data_MHS.setModel(model);
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, "Gagal menampilkan data: " + e.getMessage());
+    }
+}
+
+private void HapusData() {
+    try {
+        int selectedRow = Tabel_Data_MHS.getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(null, "Pilih baris yang ingin dihapus");
+            return;
+        }
+
+        String nik = Tabel_Data_MHS.getValueAt(selectedRow, 1).toString(); // Mengambil NIK dari baris yang dipilihi
+        cn.setAutoCommit(false);
+
+        String sql1 = "DELETE FROM jurusan_mhs WHERE NIK = ?";
+        PreparedStatement pst1 = cn.prepareStatement(sql1);
+        pst1.setString(1, nik);
+        pst1.executeUpdate();
+
+        String sql2 = "DELETE FROM biodata_mhs WHERE NIK = ?";
+        PreparedStatement pst2 = cn.prepareStatement(sql2);
+        pst2.setString(1, nik);
+        pst2.executeUpdate();
+
+        cn.commit();
+
+        JOptionPane.showMessageDialog(null, "Data berhasil dihapus");
+        TampilData();
+        
+    } catch (Exception e) {
         try {
-            st = cn.createStatement();
-            rs = st.executeQuery("SELECT * FROM biodata_mhs");
-
-            DefaultTableModel model = new DefaultTableModel();
-            model.addColumn("id_mhs");
-            model.addColumn("NIK");
-            model.addColumn("Nama Lengkap");
-            model.addColumn("jurusan");
-            model.addColumn("Jenis Kelamin");
-            model.addColumn("Tanggal Lahir");
-            model.addColumn("Asal Sekolah");
-            model.addColumn("Email");
-            model.addColumn("No Telepon");
-            model.addColumn("Alamat");
-            model.addColumn("Agama");
-            model.addColumn("Nama Orang Tua");
-
-            while (rs.next()) {
-                model.addRow(new Object[]{
-                    rs.getInt("id_mhs"),
-                    rs.getString("NIK"),
-                    rs.getString("nama_lengkap"),
-                    rs.getString("jurusan"),
-                    rs.getString("jenis_kelamin"),
-                    rs.getString("tgl_lahir"),
-                    rs.getString("asal_sekolah"),
-                    rs.getString("email"),
-                    rs.getString("no_tlp"),
-                    rs.getString("alamat"),
-                    rs.getString("agama"),
-                    rs.getString("nama_orangtua")
-                });
-            }
-
-            Tabel_Data_MHS.setModel(model);
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Gagal menampilkan data: " + e.getMessage());
+            cn.rollback();
+        } catch (Exception rollbackEx) {
+            JOptionPane.showMessageDialog(null, "Gagal membatalkan transaksi: " + rollbackEx.getMessage());
+        }
+        JOptionPane.showMessageDialog(null, "Gagal menghapus data: " + e.getMessage());
+    } finally {
+        try {
+            cn.setAutoCommit(true);
+        } catch (Exception finalEx) {
+            JOptionPane.showMessageDialog(null, "Gagal mengatur ulang auto commit: " + finalEx.getMessage());
         }
     }
-       private void HapusData(){
-       try {
-            int selectedRow = Tabel_Data_MHS.getSelectedRow();
-            String NIK = Tabel_Data_MHS.getValueAt(selectedRow, 0).toString();
-            
-            String sql = "DELETE FROM biodata_mhs WHERE id_mhs = ?";
-            PreparedStatement pst = cn.prepareStatement(sql);
-            pst.setString(1, NIK);
-        
-            pst.executeUpdate();
-            
-            JOptionPane.showMessageDialog(null, "Data berhasil dihapus");
-            TampilData();
+}
+    private void CariData() {
+    try {
+        st = cn.createStatement();
+        rs = st.executeQuery("SELECT * FROM biodata_mhs WHERE " + CmbCariData.getSelectedItem().toString() + " LIKE '%" + TxtCariData.getText() + "%'");
 
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Gagal menghapus data: " + e.getMessage());
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("id_mhs");
+        model.addColumn("NIK");
+        model.addColumn("Nama Lengkap");
+        model.addColumn("jurusan");
+        model.addColumn("Jenis Kelamin");
+        model.addColumn("Tanggal Lahir");
+        model.addColumn("Asal Sekolah");
+        model.addColumn("Email");
+        model.addColumn("No Telepon");
+        model.addColumn("Alamat");
+        model.addColumn("Agama");
+        model.addColumn("Nama Orang Tua");
+
+        while (rs.next()) {
+            model.addRow(new Object[]{
+                rs.getInt("id_mhs"),
+                rs.getString("NIK"),
+                rs.getString("nama_lengkap"),
+                rs.getString("jurusan"),
+                rs.getString("jenis_kelamin"),
+                rs.getString("tgl_lahir"),
+                rs.getString("asal_sekolah"),
+                rs.getString("email"),
+                rs.getString("no_tlp"),
+                rs.getString("alamat"),
+                rs.getString("agama"),
+                rs.getString("nama_orangtua")
+            });
         }
-       }
+
+        Tabel_Data_MHS.setModel(model);
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, "Gagal menampilkan data: " + e.getMessage());
+    }
+    }
+
+
+    
+
+
   
     
     /**
@@ -285,6 +407,7 @@ public class Tabel_Data_MHS extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> CmbCariData;
     private javax.swing.JButton Edit_BTN;
     private javax.swing.JButton Hapus_BTN;
     private javax.swing.JMenuItem MenuItem1_FormulirMHS;
@@ -292,9 +415,12 @@ public class Tabel_Data_MHS extends javax.swing.JFrame {
     private javax.swing.JMenu Menu_TabelDataMHS;
     private javax.swing.JMenuItem Menuitem3_Keluar;
     private javax.swing.JTable Tabel_Data_MHS;
+    private javax.swing.JTextField TxtCariData;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollBar jScrollBar1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

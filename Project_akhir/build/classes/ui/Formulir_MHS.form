@@ -93,7 +93,7 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace pref="42" max="32767" attributes="0"/>
+                  <EmptySpace pref="39" max="32767" attributes="0"/>
                   <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="Panel_FormulirPendaftaranMHS" min="-2" max="-2" attributes="0"/>
@@ -158,7 +158,7 @@
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="CmbJnsKel" min="-2" pref="293" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
                                               <Component id="Field_NamaLengkap" pref="294" max="32767" attributes="0"/>
                                               <Component id="Field_NIK" pref="294" max="32767" attributes="0"/>
                                               <Component id="CmbJurusan" alignment="0" max="32767" attributes="0"/>
@@ -196,7 +196,7 @@
                           <Component id="Field_NamaLengkap" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="15" max="32767" attributes="0"/>
+                      <EmptySpace pref="18" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="CmbJurusan" alignment="3" min="-2" max="-2" attributes="0"/>

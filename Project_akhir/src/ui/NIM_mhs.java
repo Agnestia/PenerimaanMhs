@@ -30,6 +30,9 @@ public class NIM_mhs extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        CmbCariData = new javax.swing.JComboBox<>();
+        TxtCariData = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         MenuItem1_FormulirMHS = new javax.swing.JMenuItem();
@@ -46,10 +49,25 @@ public class NIM_mhs extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "NIM", "Nama Lengkap", "NIK", "Jurusan"
+                "NIM", "Nama_lengkap", "NIK", "Jurusan"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
+
+        jLabel1.setText("Cari Data");
+
+        CmbCariData.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NIM", "Nama_lengkap", "NIK", "Jurusan" }));
+        CmbCariData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CmbCariDataActionPerformed(evt);
+            }
+        });
+
+        TxtCariData.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TxtCariDataKeyPressed(evt);
+            }
+        });
 
         jMenu1.setText("Menu");
 
@@ -85,23 +103,54 @@ public class NIM_mhs extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 740, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 728, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(15, 15, 15)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(CmbCariData, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(TxtCariData, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(43, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CmbCariData)
+                    .addComponent(TxtCariData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void TampilData() {
+
+    private void MenuItem2_TabelDataMHSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItem2_TabelDataMHSActionPerformed
+        dispose();new Tabel_Data_MHS().setVisible(true);
+    }//GEN-LAST:event_MenuItem2_TabelDataMHSActionPerformed
+
+    private void MenuItem3_KeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItem3_KeluarActionPerformed
+        dispose();
+    }//GEN-LAST:event_MenuItem3_KeluarActionPerformed
+
+    private void MenuItem1_FormulirMHSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItem1_FormulirMHSActionPerformed
+        dispose();new Formulir_MHS(1,"").setVisible(true);
+    }//GEN-LAST:event_MenuItem1_FormulirMHSActionPerformed
+
+    private void CmbCariDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CmbCariDataActionPerformed
+
+    }//GEN-LAST:event_CmbCariDataActionPerformed
+
+    private void TxtCariDataKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtCariDataKeyPressed
+         CariData();
+    }//GEN-LAST:event_TxtCariDataKeyPressed
+
+       private void TampilData() {
         try {
             st = cn.createStatement();
             rs = st.executeQuery("SELECT * FROM jurusan_mhs");
@@ -127,19 +176,36 @@ public class NIM_mhs extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Gagal menampilkan data: " + e.getMessage());
         }
     }
+        
+        private void CariData() {
+            try {
+                st = cn.createStatement();
+                rs = st.executeQuery("SELECT * FROM jurusan_mhs WHERE " + CmbCariData.getSelectedItem().toString() + " LIKE '%" + TxtCariData.getText() + "%'");
+
+                DefaultTableModel model = new DefaultTableModel();
+                model.addColumn("NIM");
+                model.addColumn("Nama Lengkap");
+                model.addColumn("NIK");
+                model.addColumn("Jurusan");
+
+                while (rs.next()) {
+                    model.addRow(new Object[]{
+                        rs.getString("NIM"),
+                        rs.getString("nama_lengkap"),
+                        rs.getString("NIK"),
+                        rs.getString("jurusan")
+                    });
+                }
+
+                jTable1.setModel(model);
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Gagal menampilkan data: " + e.getMessage());
+            }
+        }
+
+
     
-    private void MenuItem2_TabelDataMHSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItem2_TabelDataMHSActionPerformed
-        dispose();new Tabel_Data_MHS().setVisible(true);
-    }//GEN-LAST:event_MenuItem2_TabelDataMHSActionPerformed
-
-    private void MenuItem3_KeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItem3_KeluarActionPerformed
-        dispose();
-    }//GEN-LAST:event_MenuItem3_KeluarActionPerformed
-
-    private void MenuItem1_FormulirMHSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItem1_FormulirMHSActionPerformed
-        dispose();new Formulir_MHS(1,"").setVisible(true);
-    }//GEN-LAST:event_MenuItem1_FormulirMHSActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -176,9 +242,12 @@ public class NIM_mhs extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> CmbCariData;
     private javax.swing.JMenuItem MenuItem1_FormulirMHS;
     private javax.swing.JMenuItem MenuItem2_TabelDataMHS;
     private javax.swing.JMenuItem MenuItem3_Keluar;
+    private javax.swing.JTextField TxtCariData;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
